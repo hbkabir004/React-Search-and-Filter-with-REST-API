@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import ProductCard from "./components/CountryCard";
+import ProductCard from "./components/ProductCard";
 
 function App() {
   const [error, setError] = useState(null);
