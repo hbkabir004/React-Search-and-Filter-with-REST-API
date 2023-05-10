@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import CountryCard from "./components/CountryCard";
+import ProductCard from "./components/CountryCard";
 
 function App() {
   const [error, setError] = useState(null);
@@ -8,20 +8,10 @@ function App() {
   const [items, setItems] = useState([]);
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("");
-  const [paginate, setpaginate] = useState(8);
+  const [paginate, setpaginate] = useState(4);
 
   useEffect(() => {
-    // const request_headers = new Headers();
-    // const api_key = "your_api_key";
-    // request_headers.append("Authorization", `Bearer ${api_key}`);
-    // request_headers.append("Content-Type", "application/json");
-
-    // const request_options = {
-    //   method: "GET",
-    //   headers: request_headers,
-    // };
-
-    fetch("https://restcountries.com/v3.1/all")
+    fetch("https://mrittik-server.vercel.app/products")
       .then((res) => res.json())
       .then(
         (result) => {
@@ -36,24 +26,24 @@ function App() {
   }, []);
 
   const data = Object.values(items);
-  // console.log(items)
+  // console.log(data)
 
   const search_parameters = Object.keys(Object.assign({}, ...data));
-  const filter_items = [...new Set(data.map((item) => item.region))];
+  const filter_items = [...new Set(data.map((item) => item.categoryName))];
 
   function search(items) {
     return items.filter(
       (item) =>
-        item.region.includes(filter) &&
-        search_parameters.some((parameter) => 
-        // console.log(item[parameter].toString().toLowerCase().includes(query))
+        item.categoryName.includes(filter) &&
+        search_parameters.some((parameter) =>
+          // console.log(item[parameter].toString().toLowerCase().includes(query))
           item[parameter].toString().toLowerCase().includes(query)
         )
     );
   }
 
   const load_more = (event) => {
-    setpaginate((prevValue) => prevValue + 8);
+    setpaginate((prevValue) => prevValue + 4);
   };
 
   if (error) {
@@ -73,16 +63,16 @@ function App() {
               placeholder="Search for..."
               onChange={(e) => setQuery(e.target.value)}
             />
-            <span className="sr-only">Search countries here</span>
+            <span className="sr-only">Search Products here</span>
           </label>
 
           <div className="select">
             <select
               onChange={(e) => setFilter(e.target.value)}
               className="custom-select"
-              aria-label="Filter Countries By Region"
+              aria-label="Filter Products By Category"
             >
-              <option value="">Filter By Region</option>
+              <option value="">Filter By Category</option>
               {filter_items.map((item) => (
                 // console.log(item)
                 <option key={item} value={item}>Filter By {item}</option>
@@ -96,10 +86,10 @@ function App() {
           {search(data)
             .slice(0, paginate)
             .map((item) => (
-              // console.log(item.tld[0])
-              <CountryCard
-              key={item.tld[0]}
-              item={item}/>
+              // console.log(item)
+              <ProductCard
+                key={item.id}
+                item={item} />
             ))}
         </ul>
         <button onClick={load_more}>Load More</button>

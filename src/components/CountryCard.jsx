@@ -1,25 +1,25 @@
 import React from 'react';
 
-const CountryCard = ({ item }) => {
-    const { flags, name, population, region, capital } = item;
+const ProductCard = ({ item }) => {
+    const { img, name, price, categoryName, badge } = item;
 
     return (
         <li>
             <article className="card">
                 <div className="card-image">
-                    <img src={flags.png} alt={name.common} />
+                    <img src={img} alt={name} />
                 </div>
                 <div className="card-content">
-                    <h2 className="card-name">{name.common}</h2>
+                    <h2 className="card-name">{name}</h2>
                     <ol className="card-list">
                         <li>
-                            population: <span>{population}</span>
+                            Price: <span>{price}</span>
                         </li>
                         <li>
-                            Region: <span>{region}</span>
+                            Category: <span>{categoryName}</span>
                         </li>
                         <li>
-                            Capital: <span>{capital[0]}</span>
+                            Badge: <span>{badge}</span>
                         </li>
                     </ol>
                 </div>
@@ -28,4 +28,4 @@ const CountryCard = ({ item }) => {
     );
 };
 
-export default CountryCard;
+export default ProductCard;
