@@ -29,15 +29,16 @@ function App() {
   // console.log(data)
 
   const search_parameters = Object.keys(Object.assign({}, ...data));
+  // console.log(search_parameters[1]);
   const filter_items = [...new Set(data.map((item) => item.categoryName))];
 
   function search(items) {
     return items.filter(
       (item) =>
-        item.categoryName.includes(filter) &&
+        item.categoryName.includes(filter) 
+        &&
         search_parameters.some((parameter) =>
-          // console.log(item[parameter].toString().toLowerCase().includes(query))
-          item[parameter].toString().toLowerCase().includes(query)
+          item[parameter] && item[parameter].toString().toLowerCase().includes(query)
         )
     );
   }
