@@ -1,3 +1,3 @@
 # Learning how to create Search, filter and Paginate Components in ReactJs Projects
 
-### REST API used: [REST Countries API V-3.0](https://restcountries.com/v3.1/all)
+### REST API used: [RESTful MRITTIK PRODUCTs API](https://mrittik-server.vercel.app/products)
